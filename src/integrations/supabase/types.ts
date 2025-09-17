@@ -14,16 +14,276 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      course_instructors: {
+        Row: {
+          course_id: string
+          instructor_id: string
+        }
+        Insert: {
+          course_id: string
+          instructor_id: string
+        }
+        Update: {
+          course_id?: string
+          instructor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_instructors_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "course_instructors_instructor_id_fkey"
+            columns: ["instructor_id"]
+            isOneToOne: false
+            referencedRelation: "instructors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      courses: {
+        Row: {
+          code: string
+          created_at: string
+          credits: number | null
+          department_id: string | null
+          description: string | null
+          id: string
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          credits?: number | null
+          department_id?: string | null
+          description?: string | null
+          id?: string
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          credits?: number | null
+          department_id?: string | null
+          description?: string | null
+          id?: string
+          name?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "courses_department_id_fkey"
+            columns: ["department_id"]
+            isOneToOne: false
+            referencedRelation: "departments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      departments: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          name: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      instructors: {
+        Row: {
+          created_at: string
+          department: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          department?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          department?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          image: string | null
+          name: string | null
+          role: Database["public"]["Enums"]["user_role"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          image?: string | null
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          image?: string | null
+          name?: string | null
+          role?: Database["public"]["Enums"]["user_role"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reviews: {
+        Row: {
+          content: string
+          course_id: string
+          created_at: string
+          helpful_count: number
+          id: string
+          instructor_name: string | null
+          moderation_note: string | null
+          rating_content: number
+          rating_grading: number
+          rating_teaching: number
+          rating_workload: number
+          reported: boolean
+          semester: string
+          ta_name: string | null
+          ta_rating: Database["public"]["Enums"]["uw_grade"] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          course_id: string
+          created_at?: string
+          helpful_count?: number
+          id?: string
+          instructor_name?: string | null
+          moderation_note?: string | null
+          rating_content: number
+          rating_grading: number
+          rating_teaching: number
+          rating_workload: number
+          reported?: boolean
+          semester: string
+          ta_name?: string | null
+          ta_rating?: Database["public"]["Enums"]["uw_grade"] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          course_id?: string
+          created_at?: string
+          helpful_count?: number
+          id?: string
+          instructor_name?: string | null
+          moderation_note?: string | null
+          rating_content?: number
+          rating_grading?: number
+          rating_teaching?: number
+          rating_workload?: number
+          reported?: boolean
+          semester?: string
+          ta_name?: string | null
+          ta_rating?: Database["public"]["Enums"]["uw_grade"] | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      votes: {
+        Row: {
+          created_at: string
+          review_id: string
+          user_id: string
+          value: number
+        }
+        Insert: {
+          created_at?: string
+          review_id: string
+          user_id: string
+          value: number
+        }
+        Update: {
+          created_at?: string
+          review_id?: string
+          user_id?: string
+          value?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "votes_review_id_fkey"
+            columns: ["review_id"]
+            isOneToOne: false
+            referencedRelation: "reviews"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "votes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      rating_to_uw_grade: {
+        Args: { rating: number }
+        Returns: Database["public"]["Enums"]["uw_grade"]
+      }
     }
     Enums: {
-      [_ in never]: never
+      user_role: "USER" | "ADMIN"
+      uw_grade: "A" | "AB" | "B" | "BC" | "C" | "D" | "F"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +410,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      user_role: ["USER", "ADMIN"],
+      uw_grade: ["A", "AB", "B", "BC", "C", "D", "F"],
+    },
   },
 } as const

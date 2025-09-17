@@ -36,8 +36,8 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">M</span>
+            <div className="w-8 h-8 bg-accent border border-border rounded-lg flex items-center justify-center">
+              <span className="text-foreground font-bold text-sm">M</span>
             </div>
             <span className="text-xl font-bold text-foreground">MADSPACE</span>
           </div>

@@ -10,13 +10,13 @@ interface RatingBadgeProps {
 }
 
 const gradeColors: Record<UWGrade, string> = {
-  'A': 'bg-primary text-primary-foreground',
-  'AB': 'bg-primary/90 text-primary-foreground',
-  'B': 'bg-primary/70 text-primary-foreground',
-  'BC': 'bg-primary/50 text-primary-foreground',
-  'C': 'bg-muted text-foreground',
-  'D': 'bg-destructive/70 text-destructive-foreground',
-  'F': 'bg-destructive text-destructive-foreground',
+  'A': 'bg-green-100 text-green-800 border border-green-200',
+  'AB': 'bg-green-50 text-green-700 border border-green-200',
+  'B': 'bg-blue-50 text-blue-700 border border-blue-200',
+  'BC': 'bg-blue-50 text-blue-600 border border-blue-200',
+  'C': 'bg-yellow-50 text-yellow-700 border border-yellow-200',
+  'D': 'bg-orange-50 text-orange-700 border border-orange-200',
+  'F': 'bg-red-50 text-red-700 border border-red-200',
 };
 
 const sizeClasses = {

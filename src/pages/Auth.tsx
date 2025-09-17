@@ -92,8 +92,8 @@ export default function Auth() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-primary-foreground font-bold text-2xl">M</span>
+          <div className="w-16 h-16 bg-accent border-2 border-border rounded-xl flex items-center justify-center mx-auto mb-4">
+            <span className="text-foreground font-bold text-2xl">M</span>
           </div>
           <h1 className="text-2xl font-bold text-foreground">Welcome to MADSPACE</h1>
           <p className="text-muted-foreground">UW-Madison Course Reviews</p>

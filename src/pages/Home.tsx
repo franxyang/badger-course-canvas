@@ -37,7 +37,7 @@ export default function Home() {
         {/* Hero Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Welcome to <span className="bg-gradient-primary bg-clip-text text-transparent">MADSPACE</span>
+            Welcome to <span className="text-primary">MADSPACE</span>
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Your trusted platform for UW-Madison course reviews. Share experiences and discover the best classes for your academic journey.
@@ -151,13 +151,13 @@ export default function Home() {
         </div>
 
         {/* CTA Section */}
-        <Card className="mt-12 bg-gradient-primary text-primary-foreground">
+        <Card className="mt-12 bg-accent border-2 border-border">
           <CardContent className="text-center py-12">
-            <h2 className="text-3xl font-bold mb-4">Join the MADSPACE Community</h2>
-            <p className="text-lg mb-6 opacity-90">
+            <h2 className="text-3xl font-bold mb-4 text-foreground">Join the MADSPACE Community</h2>
+            <p className="text-lg mb-6 text-muted-foreground">
               Help fellow Badgers make informed course decisions. Your reviews matter!
             </p>
-            <Button variant="secondary" size="lg" onClick={() => navigate('/auth')}>
+            <Button size="lg" onClick={() => navigate('/auth')}>
               Get Started Today
             </Button>
           </CardContent>

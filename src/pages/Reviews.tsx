@@ -38,8 +38,8 @@ export default function Reviews() {
   // Filters and search
   const [searchQuery, setSearchQuery] = useState(searchParams.get('q') || '');
   const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'popularity');
-  const [departmentFilter, setDepartmentFilter] = useState(searchParams.get('dept') || '');
-  const [levelFilter, setLevelFilter] = useState(searchParams.get('level') || '');
+  const [departmentFilter, setDepartmentFilter] = useState(searchParams.get('dept') || 'all');
+  const [levelFilter, setLevelFilter] = useState(searchParams.get('level') || 'all');
   const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') || '1'));
 
   const departments = ['MATH', 'CS', 'PHYS', 'CHEM', 'ECON', 'HIST', 'ENGL', 'PSYC'];
@@ -68,11 +68,11 @@ export default function Reviews() {
         query = query.or(`code.ilike.%${searchQuery}%,name.ilike.%${searchQuery}%`);
       }
 
-      if (departmentFilter) {
+      if (departmentFilter && departmentFilter !== 'all') {
         query = query.eq('departments.code', departmentFilter);
       }
 
-      if (levelFilter) {
+      if (levelFilter && levelFilter !== 'all') {
         if (levelFilter === '500+') {
           query = query.gte('code', `${departmentFilter || ''} 500`);
         } else {
@@ -196,8 +196,9 @@ export default function Reviews() {
                 <Select 
                   value={departmentFilter} 
                   onValueChange={(value) => {
-                    setDepartmentFilter(value);
-                    updateSearchParams({ dept: value, page: '1' });
+                    const filterValue = value === 'all' ? '' : value;
+                    setDepartmentFilter(filterValue);
+                    updateSearchParams({ dept: filterValue, page: '1' });
                     setCurrentPage(1);
                   }}
                 >
@@ -205,7 +206,7 @@ export default function Reviews() {
                     <SelectValue placeholder="Department" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Departments</SelectItem>
+                    <SelectItem value="all">All Departments</SelectItem>
                     {departments.map(dept => (
                       <SelectItem key={dept} value={dept}>{dept}</SelectItem>
                     ))}
@@ -215,8 +216,9 @@ export default function Reviews() {
                 <Select 
                   value={levelFilter}
                   onValueChange={(value) => {
-                    setLevelFilter(value);
-                    updateSearchParams({ level: value, page: '1' });
+                    const filterValue = value === 'all' ? '' : value;
+                    setLevelFilter(filterValue);
+                    updateSearchParams({ level: filterValue, page: '1' });
                     setCurrentPage(1);
                   }}
                 >
@@ -224,7 +226,7 @@ export default function Reviews() {
                     <SelectValue placeholder="Course Level" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">All Levels</SelectItem>
+                    <SelectItem value="all">All Levels</SelectItem>
                     {levels.map(level => (
                       <SelectItem key={level} value={level}>{level} Level</SelectItem>
                     ))}
@@ -257,7 +259,7 @@ export default function Reviews() {
               </div>
 
               {/* Active Filters */}
-              {(searchQuery || departmentFilter || levelFilter) && (
+              {(searchQuery || (departmentFilter && departmentFilter !== 'all') || (levelFilter && levelFilter !== 'all')) && (
                 <div className="flex flex-wrap gap-2">
                   <span className="text-sm text-muted-foreground">Active filters:</span>
                   {searchQuery && (
@@ -265,12 +267,12 @@ export default function Reviews() {
                       Search: {searchQuery}
                     </Badge>
                   )}
-                  {departmentFilter && (
+                  {departmentFilter && departmentFilter !== 'all' && (
                     <Badge variant="secondary" className="text-xs">
                       Department: {departmentFilter}
                     </Badge>
                   )}
-                  {levelFilter && (
+                  {levelFilter && levelFilter !== 'all' && (
                     <Badge variant="secondary" className="text-xs">
                       Level: {levelFilter}
                     </Badge>
@@ -280,8 +282,8 @@ export default function Reviews() {
                     size="sm" 
                     onClick={() => {
                       setSearchQuery('');
-                      setDepartmentFilter('');
-                      setLevelFilter('');
+                      setDepartmentFilter('all');
+                      setLevelFilter('all');
                       setSearchParams({});
                       setCurrentPage(1);
                     }}

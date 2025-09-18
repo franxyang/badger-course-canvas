@@ -30,21 +30,21 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-subtle">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-4 py-16">
         {/* Hero Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
             Welcome to <span className="text-primary">MADSPACE</span>
           </h1>
-          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
             Your trusted platform for UW-Madison course reviews. Share experiences and discover the best classes for your academic journey.
           </p>
 
           {/* Search Bar */}
-          <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-8">
+          <form onSubmit={handleSearch} className="max-w-2xl mx-auto mb-10">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
               <input
@@ -52,7 +52,7 @@ export default function Home() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search courses (e.g., MATH 521, Computer Science, Prof. Smith)..."
-                className="w-full pl-12 pr-4 py-4 text-lg rounded-xl border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent shadow-card"
+                className="w-full pl-12 pr-32 py-3 text-base rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm transition-shadow"
               />
               <Button 
                 type="submit" 
@@ -64,23 +64,23 @@ export default function Home() {
             </div>
           </form>
 
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            <Button onClick={() => navigate('/reviews')} variant="outline" size="lg">
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            <Button onClick={() => navigate('/reviews')} variant="outline" size="default">
               Browse All Reviews
             </Button>
-            <Button onClick={() => navigate('/reviews?sort=popular')} variant="outline" size="lg">
+            <Button onClick={() => navigate('/reviews?sort=popular')} variant="outline" size="default">
               Popular Courses
             </Button>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {featuredStats.map((stat) => (
-            <Card key={stat.label} className="text-center">
-              <CardContent className="pt-6">
-                <stat.icon className="h-8 w-8 text-primary mx-auto mb-2" />
-                <div className="text-2xl font-bold text-foreground mb-1">{stat.value}</div>
+            <Card key={stat.label} className="text-center border border-border shadow-card">
+              <CardContent className="py-8">
+                <stat.icon className="h-8 w-8 text-muted-foreground mx-auto mb-3" />
+                <div className="text-2xl font-semibold text-foreground mb-1">{stat.value}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
               </CardContent>
             </Card>
@@ -151,13 +151,13 @@ export default function Home() {
         </div>
 
         {/* CTA Section */}
-        <Card className="mt-12 bg-accent border-2 border-border">
+        <Card className="mt-16 bg-muted border border-border shadow-card">
           <CardContent className="text-center py-12">
-            <h2 className="text-3xl font-bold mb-4 text-foreground">Join the MADSPACE Community</h2>
-            <p className="text-lg mb-6 text-muted-foreground">
+            <h2 className="text-3xl font-semibold mb-4 text-foreground">Join the MADSPACE Community</h2>
+            <p className="text-base mb-8 text-muted-foreground max-w-lg mx-auto">
               Help fellow Badgers make informed course decisions. Your reviews matter!
             </p>
-            <Button size="lg" onClick={() => navigate('/auth')}>
+            <Button size="default" onClick={() => navigate('/auth')}>
               Get Started Today
             </Button>
           </CardContent>

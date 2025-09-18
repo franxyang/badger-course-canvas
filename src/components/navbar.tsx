@@ -31,15 +31,15 @@ export function Navbar() {
   };
 
   return (
-    <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="border-b border-border bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-accent border border-border rounded-lg flex items-center justify-center">
-              <span className="text-foreground font-bold text-sm">M</span>
+          <div className="flex items-center space-x-3">
+            <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
+              <span className="text-primary-foreground font-semibold text-sm">M</span>
             </div>
-            <span className="text-xl font-bold text-foreground">MADSPACE</span>
+            <span className="text-xl font-semibold text-foreground">MADSPACE</span>
           </div>
 
           {/* Navigation */}
@@ -66,7 +66,7 @@ export function Navbar() {
               <input
                 type="text"
                 placeholder="Search courses (e.g., MATH 521)..."
-                className="w-full pl-10 pr-4 py-2 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent"
+                className="w-full pl-10 pr-4 py-1.5 text-sm rounded-md border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring transition-shadow"
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     const query = (e.target as HTMLInputElement).value;
